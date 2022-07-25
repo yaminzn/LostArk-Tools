@@ -1,0 +1,6 @@
+@import "../node_modules/bootstrap/scss/bootstrap.scss";
+
+.btn-purple {
+  @include button-variant($purple, darken($purple, 7.5%), darken($purple, 10%), lighten($purple,5%), lighten($purple, 10%), darken($purple,30%));
+  color: white !important;
+}
