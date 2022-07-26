@@ -10,6 +10,8 @@
   let startTime: number; // in ms
   let elapsedTime: number; // in ms
 
+  let toggleText: boolean = true;
+
   onMount(() => {
 		setup();
 	});
@@ -28,7 +30,7 @@
     startTime = new Date().getTime();
   }
 
-  function submit(color: Color) {
+  function submit(color: Color): void {
     success = color === pattern.answer;
     elapsedTime = new Date().getTime() - startTime;
   }
@@ -37,6 +39,9 @@
 <h4>Move to the correct clone</h4>
 <div>
   You have 8sec to go to the clone before the first wipe attack
+</div>
+<div>
+  <button on:click={() => toggleText = !toggleText} type="button" class="btn btn-primary">Change text</button>
 </div>
 
 <div class="wrapper mb-3">
@@ -48,9 +53,9 @@
 </div>
 
 <div class="d-flex justify-content-around mb-5">
-  <button on:click={() => submit(Color.Red)} disabled={!!success} type="button" class="btn btn-danger btn-lg">Open</button>
+  <button on:click={() => submit(Color.Red)} disabled={success !== null} type="button" class="btn btn-danger btn-lg">{toggleText ? 'Open' : '2'}</button>
   <button on:click={setup} type="button" class="btn btn-secondary btn-lg">Next</button>
-  <button on:click={() => submit(Color.Purple)} disabled={!!success} type="button" class="btn btn-purple btn-lg">Close</button>
+  <button on:click={() => submit(Color.Purple)} disabled={success !== null} type="button" class="btn btn-purple btn-lg">{toggleText ? 'Closed' : '0'}</button>
 </div>
 
 {#if success !== null}
